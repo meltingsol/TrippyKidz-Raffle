@@ -13,8 +13,12 @@ import {
 } from "@solana/spl-token";
 
 import { UtilizeWallet, sendTxUsingExternalSignature, createTransferTransaction, DisplayEncoding, PhantomEvent, PhantomRequestMethod, ConnectOpts, PhantomProvider } from "../lib/Transaction";
-
+import DialogText from './DialogText';
 import { PublicKey, Connection, clusterApiUrl } from "@solana/web3.js";
+
+// 
+
+// 
 
 const getProvider = () => {
   if ("solana" in window) {
@@ -24,6 +28,8 @@ const getProvider = () => {
     }
   }
 };
+
+
 
 const networks = {
   mainnet: { url: "https://ssc-dao.genesysgo.net/", displayName: "Mainnet Beta" },
@@ -49,6 +55,8 @@ const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new PublicKey(
 
     const [defaultTokenMintaddress,setDefaultTokenMintaddress] = useState(myData.token_address);
     const [numberRaffles,setNumberRaffles] = useState(1);
+
+
     // const [amountRaffle,setAmountRaffle] = useState(myData.amount);
 
     const handleIncrementRaffle = () => {
@@ -441,12 +449,17 @@ const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new PublicKey(
          */}
         {/* &nbsp;
         &nbsp; */}
+            
+
                 <div style={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",marginBottom:"10px"}}>
                   <img src={myData.auction_image_url} style={{width:"100%",height:"auto"}}></img>
                 </div>
 
                 <div className="dark:bg-slate-800" style={{width:"100%",textAlign:"center",marginBottom:"10px"}}>
                 Cost per entry: {myData.actual_price} $KIDZ
+                </div>
+                <div className="dark:bg-slate-800" style={{fontSize:"0.6em",width:"100%",textAlign:"center",marginBottom:"10px"}}>
+                 {myData.subtext_1} 
                 </div>
                 <div className="dark:bg-slate-800" style={{width:"100%",textAlign:"center"}}>
               <button class="button-26" role="button" onClick={handleDecrementRaffle}>-</button>
@@ -463,7 +476,9 @@ const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new PublicKey(
         }
         }
         >Purchase</button>
-
+              <div style={{width:"100%",textAlign:"center",marginTop:"10px"}}>
+           <DialogText/>
+            </div>
         {/* <button
            id="purchase_button" className = "p-2 mb-3 rounded-md shadow-lg bg-indigo-500 hover:shadow-xl duration-300 hover:bg-indigo-600 text-white"
           onClick={(e) => {

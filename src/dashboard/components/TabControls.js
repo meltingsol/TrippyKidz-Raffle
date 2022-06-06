@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import  "../CSS/TabControls.scss"
+import myData from './data.json';
 
 const TabControls = ({
     menuItems,
@@ -31,6 +32,7 @@ const TabControls = ({
                                 style={{width:"100%"}}
                             >
                                 <div className='align-center'>{item.label || item}</div>
+
                             </div>
                         );
                     })
