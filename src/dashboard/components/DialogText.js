@@ -26,7 +26,7 @@ export default function DialogText() {
 
   return (
     <div>
-      <button class="button-26" style={{fontFamily:"Nosifer",backgroundColor:"#4F46E5",borderRadius:"23px"}} role="button"
+      <button className="button-26" style={{fontFamily:"Nosifer",backgroundColor:"#4F46E5",borderRadius:"23px"}} role="button"
         onClick={handleClickOpen}>
           View Winners
         </button>

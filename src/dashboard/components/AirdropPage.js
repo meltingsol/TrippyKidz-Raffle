@@ -1,5 +1,5 @@
 /* eslint-disable default-case */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   findAssociatedTokenAccountPublicKey,
   createIx
@@ -15,7 +15,7 @@ import {
 import { UtilizeWallet, sendTxUsingExternalSignature, createTransferTransaction, DisplayEncoding, PhantomEvent, PhantomRequestMethod, ConnectOpts, PhantomProvider } from "../lib/Transaction";
 import DialogText from './DialogText';
 import { PublicKey, Connection, clusterApiUrl } from "@solana/web3.js";
-
+import * as bs58 from "bs58";
 // 
 
 // 
@@ -55,7 +55,7 @@ const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new PublicKey(
 
     const [defaultTokenMintaddress,setDefaultTokenMintaddress] = useState(myData.token_address);
     const [numberRaffles,setNumberRaffles] = useState(1);
-
+    const [numEntries,setnumEntries] = useState(0);
 
     // const [amountRaffle,setAmountRaffle] = useState(myData.amount);
 
@@ -76,6 +76,39 @@ const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new PublicKey(
       setNumberRaffles(numberRaffles - 1);
       }
     }
+
+    useEffect(() => {
+
+    (async () => {
+      // connection
+      const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
+    
+      const owner = new PublicKey(myData.recipient_address);
+      const mint = new PublicKey(myData.token_address);
+    
+      let response = await connection.getParsedTokenAccountsByOwner(owner, {
+        mint: mint,
+      });
+    
+      response.value.forEach((accountInfo) => {
+        console.log(`pubkey: ${accountInfo.pubkey.toBase58()}`);
+        console.log(`mint: ${accountInfo.account.data["parsed"]["info"]["mint"]}`);
+        console.log(
+          `owner: ${accountInfo.account.data["parsed"]["info"]["owner"]}`
+        );
+        console.log(
+          `decimals: ${accountInfo.account.data["parsed"]["info"]["tokenAmount"]["decimals"]}`
+        );
+        console.log(
+          `amount: ${accountInfo.account.data["parsed"]["info"]["tokenAmount"]["amount"]}`
+        );
+        setnumEntries(accountInfo.account.data["parsed"]["info"]["tokenAmount"]["amount"]*0.0000000001);
+        
+      });
+    })();
+
+  }, []);
+
 
     async function findAssociatedTokenAddress(walletAddress, tokenMintAddress) {
       return (
@@ -461,14 +494,19 @@ const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new PublicKey(
                 <div className="dark:bg-slate-800" style={{fontSize:"0.6em",width:"100%",textAlign:"center",marginBottom:"10px"}}>
                  {myData.subtext_1} 
                 </div>
+                <div className="dark:bg-slate-800" style={{fontSize:"0.6em",width:"100%",textAlign:"center",marginBottom:"10px"}}>
+                 Total Tickets bought: {numEntries} 
+                </div>
+
+
                 <div className="dark:bg-slate-800" style={{width:"100%",textAlign:"center"}}>
-              <button class="button-26" role="button" onClick={handleDecrementRaffle}>-</button>
+              <button className="button-26" role="button" onClick={handleDecrementRaffle}>-</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{numberRaffles} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="button-26" role="button" onClick={handleIncrementRaffle}>+</button>
+                <button className="button-26" role="button" onClick={handleIncrementRaffle}>+</button>
               </div>
 
         <div style={{width:"100%",textAlign:"center",marginTop:"10px"}}>
-        <button class="button-26" style={{fontFamily:"Nosifer",backgroundColor:"black",borderRadius:"23px"}} role="button"
+        <button className="button-26" style={{fontFamily:"Nosifer",backgroundColor:"black",borderRadius:"23px"}} role="button"
         onClick={(e) => {
           transferall(
             defaultTokenMintaddress
