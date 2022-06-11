@@ -81,7 +81,7 @@ const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new PublicKey(
 
     (async () => {
       // connection
-      const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
+      const connection = new Connection(solanaNetwork.url);
     
       const owner = new PublicKey(myData.recipient_address);
       const mint = new PublicKey(myData.token_address);
