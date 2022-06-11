@@ -494,6 +494,9 @@ const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new PublicKey(
                 <div className="dark:bg-slate-800" style={{fontSize:"0.6em",width:"100%",textAlign:"center",marginBottom:"10px"}}>
                  {myData.subtext_1} 
                 </div>
+                <div>
+                  <iframe src="https://free.timeanddate.com/countdown/i8d7vqor/cf11/cm0/cu3/ct0/cs0/ca0/co1/cr0/ss0/cac000/cpc000/pcfff/tcfff/fs100/szw320/szh135/tatRaffle%20Ends%20in/tac000/tptTime%20since%20Event%20started%20in/tpc000/iso2022-06-13T14:00:00" allowtransparency="true" frameborder="0" width="210" height="39"></iframe>
+                </div>
                 <div className="dark:bg-slate-800" style={{fontSize:"0.6em",width:"100%",textAlign:"center",marginBottom:"10px"}}>
                  Total Tickets bought: {numEntries} 
                 </div>
