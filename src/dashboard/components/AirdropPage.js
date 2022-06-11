@@ -494,7 +494,7 @@ const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new PublicKey(
                 <div className="dark:bg-slate-800" style={{fontSize:"0.6em",width:"100%",textAlign:"center",marginBottom:"10px"}}>
                  {myData.subtext_1} 
                 </div>
-                <div>
+                <div style={{marginBottom:"10px"}}>
                   <iframe src="https://free.timeanddate.com/countdown/i8d7wq66/cf12/cm0/cu4/ct0/cs0/ca0/co0/cr0/ss0/cac000/cpc000/pcfff/tcfff/fn3/fs100/szw320/szh135/iso2022-06-13T14:00:00" allowtransparency="true" frameborder="0" width="116" height="30"></iframe>
                 </div>
                 <div className="dark:bg-slate-800" style={{fontSize:"0.6em",width:"100%",textAlign:"center",marginBottom:"10px"}}>
